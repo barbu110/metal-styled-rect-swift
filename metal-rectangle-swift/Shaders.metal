@@ -59,9 +59,10 @@ rect_vertex_shader(uint vertex_id [[vertex_id]],
                    constant Uniforms *uniforms [[buffer(2)]]) {
     constant auto &v = vertices[vertex_id];
     float2 position = v * rect_uniforms->size + rect_uniforms->origin;
-
+    float4 frag_position = to_device_position(position, uniforms->viewport_size);
+    
     return RectFragmentData {
-        .position = to_device_position(position, uniforms->viewport_size),
+        .position = frag_position,
         .rect_origin = rect_uniforms->origin,
         .rect_size = rect_uniforms->size,
         .border_size = rect_uniforms->border_size,
@@ -74,19 +75,26 @@ rect_vertex_shader(uint vertex_id [[vertex_id]],
 fragment float4
 rect_fragment_shader(RectFragmentData in [[stage_in]]) {
     float2 p = in.position.xy;
-    float2 border_corner = in.rect_origin + in.rect_size;
-    float2 border_origin = in.rect_origin;
+    float2 rect_center = in.rect_origin + in.rect_size / 2.;
     
-    float distance = rect_sdf(p, in.rect_origin, in.rect_size, in.corner_radius);
-    if (distance > 0.0) {
+    float shape_distance = rect_sdf(p, in.rect_origin, in.rect_size, in.corner_radius);
+    if (shape_distance > 0.0) {
         return float4(0.0, 0.0, 0.0, 0.0);
     }
+    
+    // Subtracting the width of borders (right, bottom) and (top, left)
+    float2 background_size = in.rect_size - in.border_size.yz - in.border_size.xw;
+    // Moving the origin of the background to the right by sizes of border (top, left)
+    float2 background_origin = in.rect_origin + in.border_size.xw;
 
-    bool is_border = p.x <= (border_origin.x + in.border_size.w) || // left border
-        p.x >= (border_corner.x - in.border_size.y) || // right broder
-        p.y <= (border_origin.y + in.border_size.x) || // top border
-        p.y >= (border_corner.y - in.border_size.z); // bottom border
+    float4 border_color = in.border_color;
+    if (in.corner_radius > 0) {
+        border_color.a *= 1.0 - smoothstep(-.75, -.1, shape_distance);
+    }
 
-    return is_border ? in.border_color : in.background_color;
+    float background_distance = rect_sdf(p, background_origin, background_size, in.corner_radius);
+    float4 color = mix(in.background_color, border_color, smoothstep(-0.5, 0.5, background_distance));
+    
+    return color;
 }
 

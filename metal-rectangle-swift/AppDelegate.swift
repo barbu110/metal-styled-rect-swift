@@ -79,10 +79,10 @@ class Renderer: NSObject, MTKViewDelegate {
         var rectUniforms = PerRectUniforms(
             size: SIMD2(200, 100),
             origin: SIMD2(20, 20),
-            background_color: SIMD4(1.0, 0.5, 0.5, 1.0),
-            border_size: SIMD4(1.0, 1.0, 4.0, 1.0),
-            border_color: SIMD4(0.3, 0.3, 0.3, 1.0),
-            corner_radius: 16
+            background_color: SIMD4(0.8, 0.8, 0.8, 1.0),
+            border_size: SIMD4(1.0, 1.0, 8.0, 1.0),
+            border_color: SIMD4(0.0, 0.0, 0.0, 1.0),
+            corner_radius: 8
         )
         let rectUniformsBuffer = device.makeBuffer(
             bytes: &rectUniforms,
