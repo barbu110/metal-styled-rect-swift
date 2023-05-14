@@ -10,6 +10,7 @@
 		76B3C1B32A0FD30D0075F8E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B3C1B22A0FD30D0075F8E9 /* AppDelegate.swift */; };
 		76B3C1B52A0FD30E0075F8E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76B3C1B42A0FD30E0075F8E9 /* Assets.xcassets */; };
 		76B3C1B82A0FD30F0075F8E9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76B3C1B62A0FD30F0075F8E9 /* MainMenu.xib */; };
+		76B3C1C02A0FD3330075F8E9 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 76B3C1BF2A0FD3330075F8E9 /* Shaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +19,9 @@
 		76B3C1B42A0FD30E0075F8E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76B3C1B72A0FD30F0075F8E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		76B3C1B92A0FD30F0075F8E9 /* metal_rectangle_swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = metal_rectangle_swift.entitlements; sourceTree = "<group>"; };
+		76B3C1BF2A0FD3330075F8E9 /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		76B3C1C12A0FE9480075F8E9 /* ShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
+		76B3C1C22A0FEA220075F8E9 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,9 @@
 				76B3C1B42A0FD30E0075F8E9 /* Assets.xcassets */,
 				76B3C1B62A0FD30F0075F8E9 /* MainMenu.xib */,
 				76B3C1B92A0FD30F0075F8E9 /* metal_rectangle_swift.entitlements */,
+				76B3C1BF2A0FD3330075F8E9 /* Shaders.metal */,
+				76B3C1C12A0FE9480075F8E9 /* ShaderTypes.h */,
+				76B3C1C22A0FEA220075F8E9 /* Bridging-Header.h */,
 			);
 			path = "metal-rectangle-swift";
 			sourceTree = "<group>";
@@ -128,6 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76B3C1C02A0FD3330075F8E9 /* Shaders.metal in Sources */,
 				76B3C1B32A0FD30D0075F8E9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +288,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.vicbarbu.metal-rectangle-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "metal-rectangle-swift/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -305,6 +314,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.vicbarbu.metal-rectangle-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "metal-rectangle-swift/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
