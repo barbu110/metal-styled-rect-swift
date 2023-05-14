@@ -59,9 +59,7 @@ class Renderer: NSObject, MTKViewDelegate {
         super.init()
     }
     
-    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        
-    }
+    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {}
     
     func triggerProgrammaticCapture() {
         let captureManager = MTLCaptureManager.shared()
@@ -83,7 +81,8 @@ class Renderer: NSObject, MTKViewDelegate {
             origin: SIMD2(20, 20),
             background_color: SIMD4(1.0, 0.5, 0.5, 1.0),
             border_size: SIMD4(1.0, 1.0, 4.0, 1.0),
-            border_color: SIMD4(0.3, 0.3, 0.3, 1.0)
+            border_color: SIMD4(0.3, 0.3, 0.3, 1.0),
+            corner_radius: 16
         )
         let rectUniformsBuffer = device.makeBuffer(
             bytes: &rectUniforms,
@@ -151,6 +150,13 @@ class Renderer: NSObject, MTKViewDelegate {
         
         let attachment = descriptor.colorAttachments[0]
         attachment?.pixelFormat = .bgra8Unorm
+        attachment?.isBlendingEnabled = true
+        attachment?.rgbBlendOperation = .add
+        attachment?.alphaBlendOperation = .add
+        attachment?.sourceRGBBlendFactor = .sourceAlpha
+        attachment?.sourceAlphaBlendFactor = .sourceAlpha
+        attachment?.destinationRGBBlendFactor = .oneMinusSourceAlpha
+        attachment?.destinationAlphaBlendFactor = .oneMinusSourceAlpha
 
         do {
             return try device.makeRenderPipelineState(descriptor: descriptor)

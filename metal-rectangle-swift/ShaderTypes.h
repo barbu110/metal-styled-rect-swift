@@ -19,6 +19,8 @@ struct PerRectUniforms {
     
     vector_float4 border_size; // (top, right, bottom, left)
     vector_float4 border_color;
+    
+    float corner_radius;
 };
 
 struct Uniforms {

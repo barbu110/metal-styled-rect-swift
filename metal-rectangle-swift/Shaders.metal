@@ -23,6 +23,35 @@ float4 to_device_position(float2 pixel_space_pos, float2 viewport_size) {
     return ndc_pos;
 }
 
+float rect_sdf(
+    float2 absolute_pixel_position,
+    float2 origin,
+    float2 size,
+    float corner_radius
+) {
+    auto half_size = size / 2.;
+    auto rect_center = origin + half_size;
+    
+    // Change coordinate space so that the rectangle's center is at the origin,
+    // taking advantage of the problem's symmetry.
+    float2 pixel_position = abs(absolute_pixel_position - rect_center);
+    
+    // Shrink rectangle by the corner radius.
+    float2 shrunk_corner_position = half_size - corner_radius;
+    
+    // Determine the distance vector from the pixel to the rectangle corner,
+    // disallowing negative components to simplify the three cases.
+    float2 pixel_to_shrunk_corner = max(float2(0., 0.), pixel_position - shrunk_corner_position);
+    
+    float distance_to_shrunk_corner = length(pixel_to_shrunk_corner);
+
+    // Subtract the corner radius from the calculated distance to produce a
+    // rectangle having the desired size.
+    float distance = distance_to_shrunk_corner - corner_radius;
+
+    return distance;
+}
+
 vertex RectFragmentData
 rect_vertex_shader(uint vertex_id [[vertex_id]],
                    constant float2 *vertices [[buffer(0)]],
@@ -38,6 +67,7 @@ rect_vertex_shader(uint vertex_id [[vertex_id]],
         .border_size = rect_uniforms->border_size,
         .border_color = rect_uniforms->border_color,
         .background_color = rect_uniforms->background_color,
+        .corner_radius = rect_uniforms->corner_radius,
     };
 }
 
@@ -46,6 +76,12 @@ rect_fragment_shader(RectFragmentData in [[stage_in]]) {
     float2 p = in.position.xy;
     float2 border_corner = in.rect_origin + in.rect_size;
     float2 border_origin = in.rect_origin;
+    
+    float distance = rect_sdf(p, in.rect_origin, in.rect_size, in.corner_radius);
+    if (distance > 0.0) {
+        return float4(0.0, 0.0, 0.0, 0.0);
+    }
+
     bool is_border = p.x <= (border_origin.x + in.border_size.w) || // left border
         p.x >= (border_corner.x - in.border_size.y) || // right broder
         p.y <= (border_origin.y + in.border_size.x) || // top border
