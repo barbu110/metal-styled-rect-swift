@@ -93,7 +93,7 @@ rect_fragment_shader(RectFragmentData in [[stage_in]]) {
     }
 
     float background_distance = rect_sdf(p, background_origin, background_size, in.corner_radius);
-    float4 color = mix(in.background_color, border_color, smoothstep(-0.5, 0.5, background_distance));
+    float4 color = mix(in.background_color, border_color, smoothstep(-0.7, 0.5, background_distance));
     
     return color;
 }

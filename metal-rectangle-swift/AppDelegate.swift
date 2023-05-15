@@ -17,7 +17,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         mtkView.translatesAutoresizingMaskIntoConstraints = false
         mtkView.device = device
         mtkView.colorPixelFormat = .bgra8Unorm
-
+        mtkView.layer?.allowsEdgeAntialiasing = true
+        
         guard let contentView = window.contentView else { print("Could not get the content view."); return }
         contentView.addSubview(mtkView)
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[mtkView]|", metrics: nil, views: ["mtkView": mtkView]))
@@ -80,7 +81,7 @@ class Renderer: NSObject, MTKViewDelegate {
             size: SIMD2(200, 100),
             origin: SIMD2(20, 20),
             background_color: SIMD4(0.8, 0.8, 0.8, 1.0),
-            border_size: SIMD4(1.0, 1.0, 8.0, 1.0),
+            border_size: SIMD4(1.0, 1.0, 1.0, 1.0),
             border_color: SIMD4(0.0, 0.0, 0.0, 1.0),
             corner_radius: 8
         )
