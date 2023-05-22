@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		766FBDD22A1C010F00F2CCB9 /* MetalLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766FBDD12A1C010F00F2CCB9 /* MetalLayerView.swift */; };
+		766FBDD42A1C019B00F2CCB9 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766FBDD32A1C019B00F2CCB9 /* Renderer.swift */; };
 		76B3C1B32A0FD30D0075F8E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B3C1B22A0FD30D0075F8E9 /* AppDelegate.swift */; };
 		76B3C1B52A0FD30E0075F8E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76B3C1B42A0FD30E0075F8E9 /* Assets.xcassets */; };
 		76B3C1B82A0FD30F0075F8E9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76B3C1B62A0FD30F0075F8E9 /* MainMenu.xib */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		766FBDD12A1C010F00F2CCB9 /* MetalLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalLayerView.swift; sourceTree = "<group>"; };
+		766FBDD32A1C019B00F2CCB9 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		76B3C1AF2A0FD30D0075F8E9 /* metal-rectangle-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "metal-rectangle-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76B3C1B22A0FD30D0075F8E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76B3C1B42A0FD30E0075F8E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,6 +65,8 @@
 				76B3C1BF2A0FD3330075F8E9 /* Shaders.metal */,
 				76B3C1C12A0FE9480075F8E9 /* ShaderTypes.h */,
 				76B3C1C22A0FEA220075F8E9 /* Bridging-Header.h */,
+				766FBDD12A1C010F00F2CCB9 /* MetalLayerView.swift */,
+				766FBDD32A1C019B00F2CCB9 /* Renderer.swift */,
 			);
 			path = "metal-rectangle-swift";
 			sourceTree = "<group>";
@@ -135,6 +141,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				766FBDD42A1C019B00F2CCB9 /* Renderer.swift in Sources */,
+				766FBDD22A1C010F00F2CCB9 /* MetalLayerView.swift in Sources */,
 				76B3C1C02A0FD3330075F8E9 /* Shaders.metal in Sources */,
 				76B3C1B32A0FD30D0075F8E9 /* AppDelegate.swift in Sources */,
 			);
