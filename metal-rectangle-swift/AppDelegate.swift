@@ -19,10 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         mtkView.colorPixelFormat = .bgra8Unorm
         mtkView.layer?.allowsEdgeAntialiasing = true
         
-        guard let contentView = window.contentView else { print("Could not get the content view."); return }
-        contentView.addSubview(mtkView)
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[mtkView]|", metrics: nil, views: ["mtkView": mtkView]))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[mtkView]|", metrics: nil, views: ["mtkView": mtkView]))
+        window.contentView = mtkView
 
         renderer = Renderer(view: mtkView, device: device!)
         mtkView.delegate = renderer
